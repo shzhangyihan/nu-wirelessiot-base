@@ -42,20 +42,20 @@ void ble_evt_adv_report(ble_evt_t const* p_ble_evt) {
         adv_report->data.len;  // length of advertisement payload data
 
     if (ble_addr[2] == 0x4e) {
-        printf("\n==============================\n");
-        printf("Received an advertisement!\n");
-        printf("Parsing payload: ");
-        for (size_t i = 0; i < adv_len; i++) {
-            printf("%x ", adv_buf[i]);
-        }
-        printf("\n");
+        // printf("\n==============================\n");
+        // printf("Received an advertisement!\n");
+        // printf("Parsing payload: ");
+        // for (size_t i = 0; i < adv_len; i++) {
+        //     printf("%x ", adv_buf[i]);
+        // }
+        // printf("\n");
         size_t offset = 0;
         while (offset < adv_len) {
             size_t length = adv_buf[offset];
             size_t type = adv_buf[offset + 1];
             switch (type) {
                 case 0x1: {
-                    printf("Flags: %d\n", adv_buf[offset + 2]);
+                    // printf("Flags: %d\n", adv_buf[offset + 2]);
                     break;
                 }
                 case 0x9: {
@@ -67,10 +67,10 @@ void ble_evt_adv_report(ble_evt_t const* p_ble_evt) {
                     break;
                 }
                 case 0xFF: {
-                    printf("Manufacturer Specific Data: \n");
-                    printf("Company Identifier Code: %c%c\n",
-                           adv_buf[offset + 2], adv_buf[offset + 3]);
-                    printf("Data: \n");
+                    // printf("Manufacturer Specific Data: \n");
+                    // printf("Company Identifier Code: %c%c\n",
+                    //        adv_buf[offset + 2], adv_buf[offset + 3]);
+                    // printf("Data: \n");
                     for (size_t i = 2; i < length - 1; i++) {
                         printf("%c", adv_buf[offset + 2 + i]);
                     }
@@ -78,14 +78,14 @@ void ble_evt_adv_report(ble_evt_t const* p_ble_evt) {
                     break;
                 }
                 default: {
-                    printf("Unrecognized type %x Skipping!\n", type);
+                    // printf("Unrecognized type %x Skipping!\n", type);
                     break;
                 }
             }
             offset = offset + length + 1;
         }
-        printf("End of advertisement\n");
-        printf("==============================\n");
+        // printf("End of advertisement\n");
+        // printf("==============================\n");
     }
 }
 
